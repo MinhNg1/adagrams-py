@@ -79,7 +79,15 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
-    pass
+    score = 0
+
+    for letter in word.upper():
+        score += SCORE_CHART.get(letter, 0)
+
+    if len(word) >= 7:
+        score += 8
+
+    return score
 
 def get_highest_word_score(word_list):
     pass
