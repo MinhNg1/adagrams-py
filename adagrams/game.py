@@ -68,13 +68,20 @@ def draw_letters():
     return hand
 
 def uses_available_letters(word, letter_bank):
-    hand = letter_bank.copy()
+    # Create a map to store each letter and its count
+    letter_bank_map = {}
 
+    for letter in letter_bank:
+        letter_bank_map[letter] = letter_bank_map.get(letter, 0) + 1
+
+    # Check whether the word uses available letters
     for letter in word.upper():
-        if letter not in hand:
+        count = letter_bank_map.get(letter, 0)
+
+        if count == 0:
             return False
-        
-        hand.remove(letter)
+
+        letter_bank_map[letter] = count - 1
 
     return True
 
