@@ -41,7 +41,6 @@ SCORE_CHART = {
     "Q": 10, "Z": 10
 }
 
-
 def draw_letters():
     letter_pool = LETTER_POOL.copy()
 
@@ -51,19 +50,22 @@ def draw_letters():
         if quantity > 0
     ]
 
+    available_letters_length = len(available_letters)
+
     hand = []
 
    # loop until we have 10 letters in hand
     while len(hand) < HAND_SIZE:
-        index = randint(0, len(available_letters) - 1)
+        index = randint(0, available_letters_length - 1)
         letter = available_letters[index]
 
         hand.append(letter)
         letter_pool[letter] -= 1
 
-        # remove letter from available_letters if quality is 0
+        # Move last letter to position when letter is not available and update length
         if letter_pool[letter] == 0:
-            available_letters.pop(index)
+            available_letters_length -= 1
+            available_letters[index] = available_letters[available_letters_length]
 
     return hand
 
