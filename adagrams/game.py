@@ -68,7 +68,15 @@ def draw_letters():
     return hand
 
 def uses_available_letters(word, letter_bank):
-    pass
+    hand = letter_bank.copy()
+
+    for letter in word.upper():
+        if letter not in hand:
+            return False
+        
+        hand.remove(letter)
+
+    return True
 
 def score_word(word):
     pass
